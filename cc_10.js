@@ -41,6 +41,7 @@ console.log(prod1.getDetails())
 class Inventory {
     constructor() {
         this.products = []
+        this.orders = []
     }
     addProduct(product) {
         this.products.push(product)
@@ -48,8 +49,24 @@ class Inventory {
     listProducts() {
         this.products.forEach((product => console.log(product.getDetails())))
     }
+// Task 4 - Implementing Order Management
+    placeOrder(orderId, product, quantity) {
+        if (product.stock >= quantity) {
+        const newOrder = new Order(orderId, product, quantity)
+        this.orders.push(newOrder)
+        }
+        else {
+            return `Order not possible due to low stock.`
+        }
+    }
+    listOrders() {
+        this.orders.forEach((order => console.log(order.getOrderDetails())))
+    }
 }
 
 const inventory = new Inventory()
 inventory.addProduct(prod1)
 inventory.listProducts()
+inventory.placeOrder(601, prod1, 2);
+inventory.listOrders();
+console.log(prod1.getDetails());
